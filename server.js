@@ -39,10 +39,18 @@ const server = http.createServer( (req, res) => {
     </html>`;
 
     fs.writeFile(newFileName, newFileBody, (err) => {
-      // if (err) throw err;
-      console.log('It\'s saved!');
+      if (err) {
+        console.log('New file creation has failed');
+      };
+      console.log('New file has been created!');
+    });
+
+    res.writeHead(200, {
+      'Content-Type': 'application/json',
+      'success': true
     });
   });
+
 
   req.on('end', () => {
 
