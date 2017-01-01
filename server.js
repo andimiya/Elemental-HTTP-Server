@@ -51,8 +51,6 @@ const server = http.createServer( (req, res) => {
           console.log('New file has been created!');
         });
 
-
-
         res.end('post finished');
       });
     }
@@ -63,62 +61,56 @@ const server = http.createServer( (req, res) => {
 
   else if (req.method === 'GET') {
 
-
-    req.on('end', () => {
-      console.log('GET')
-
-      if (req.url === '/') {
-        fs.readFile('./public/index.html', (err, content) => {
-          if (err) {
-            res.statusCode = 500;
-            res.write('Server fault occured\n');
-          }
-          res.write(content);
-          res.end();
-        });
-      }
-      else if (req.url === '/hydrogen') {
-        fs.readFile('./public/hydrogen.html', (err, content) => {
-          if (err) {
-            res.statusCode = 500;
-            res.write('Server fault occured\n');
-          }
-          res.write(content);
-          res.end();
-        });
-      }
-      else if (req.url === '/helium') {
-        fs.readFile('./public/helium.html', (err, content) => {
-          if (err) {
-            res.statusCode = 500;
-            res.write('Server fault occured\n');
-          }
-          res.write(content);
-          res.end();
-        });
-      }
-      else if (req.url === '/css/styles.css') {
-        fs.readFile('./public/css/styles.css', (err, content) => {
-          if (err) {
-            res.statusCode = 500;
-            res.write('Server fault occured\n');
-          }
-          res.write(content);
-          res.end();
-        });
-      }
-
-      else {
-        fs.readFile('./public/404.html', (err, content) => {
-          if (err) {
-            res.statusCode = 500;
-            res.write('Server fault occured\n');
-          }
-          res.write(content);
-          res.end();
-        });
-      }
-    });
+    if (req.url === '/') {
+      fs.readFile('./public/index.html', (err, content) => {
+        if (err) {
+          res.statusCode = 500;
+          res.write('Server fault occured\n');
+        }
+        res.write(content);
+        res.end();
+      });
+    }
+    else if (req.url === '/hydrogen') {
+      fs.readFile('./public/hydrogen.html', (err, content) => {
+        if (err) {
+          res.statusCode = 500;
+          res.write('Server fault occured\n');
+        }
+        res.write(content);
+        res.end();
+      });
+    }
+    else if (req.url === '/helium') {
+      fs.readFile('./public/helium.html', (err, content) => {
+        if (err) {
+          res.statusCode = 500;
+          res.write('Server fault occured\n');
+        }
+        res.write(content);
+        res.end();
+      });
+    }
+    else if (req.url === '/css/styles.css') {
+      fs.readFile('./public/css/styles.css', (err, content) => {
+        if (err) {
+          res.statusCode = 500;
+          res.write('Server fault occured\n');
+        }
+        res.write(content);
+        res.end();
+      });
+    }
+    else {
+      fs.readFile('./public/404.html', (err, content) => {
+        if (err) {
+          res.statusCode = 500;
+          res.write('Server fault occured\n');
+        }
+        res.write(content);
+        res.end();
+      });
+    }
   }
 
   else {
