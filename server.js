@@ -3,6 +3,11 @@ const PORT = process.env.PORT || 1234;
 const fs = require('fs');
 const querystring = require('querystring');
 
+// var elementName = '';
+// var elementSymbol = '';
+// var elementAtomicNumber = '';
+// var elementDescription = '';
+// var newFileName = '';
 
 
 const server = http.createServer( (req, res) => {
@@ -14,19 +19,27 @@ const server = http.createServer( (req, res) => {
     method: 'POST',
   };
 
-  res.write('YES');
-  fs.writeFile('Boron.txt', reqBody, (err) => {
-    // if (err) throw err;
-    console.log('It\'s saved!');
-  });
-
-
   var reqBody = '';
   req.setEncoding('utf8');
   req.on('data', (chunk) => {
     reqBody += chunk;
-  console.log(reqBody, 'reqbody');
+
+  var reqSplit = querystring.parse(reqBody);
+  var elementName = reqSplit.elementName;
+  var newFileName = elementName + ".html";
+  var elementSymbol = reqSplit.elementSymbol;
+  var elementAtomicNumber = reqSplit.elementAtomicNumber;
+  var elementDescription = reqSplit.elementDescription;
+
+  res.write('YES');
+  console.log(newFileName);
+  fs.writeFile(newFileName, 'test', (err) => {
+    // if (err) throw err;
+    console.log('It\'s saved!');
   });
+  });
+
+
 
   req.on('end', () => {
 
