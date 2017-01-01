@@ -1,13 +1,31 @@
 const http = require('http');
 const PORT = process.env.PORT || 1234;
 const fs = require('fs');
+const querystring = require('querystring');
+
+
 
 const server = http.createServer( (req, res) => {
 
-  let reqBody = '';
+  var options = {
+    hostname: 'localhost',
+    port: 1234,
+    path: '/elements',
+    method: 'POST',
+  };
+
+  res.write('YES');
+  fs.writeFile('Boron.txt', reqBody, (err) => {
+    // if (err) throw err;
+    console.log('It\'s saved!');
+  });
+
+
+  var reqBody = '';
   req.setEncoding('utf8');
   req.on('data', (chunk) => {
     reqBody += chunk;
+  console.log(reqBody, 'reqbody');
   });
 
   req.on('end', () => {
